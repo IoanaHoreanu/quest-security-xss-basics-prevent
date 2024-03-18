@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+    
     <title>Underworld underground</title>
 
     <link rel="stylesheet" type="text/css" href="vendors/bootstrap.min.css">
@@ -27,10 +27,10 @@
             </p>
 
             <!-- XSS vulnerability
+
                     Hack hint: typing <script>alert(1)</script> in the input field won't work, but
                     typing something like <img src=" " onerror="alert(1)"> will! -->
 
-            <!-- Encodage de l'entrée utilisateur pour éviter les attaques XSS -->
             <input class="text-center" placeholder="Answer here." id="token-question" style="margin-bottom: 1%;">
 
             <p><strong>You:</strong> Well, about my ticket... I <span id="token-answer"
@@ -40,25 +40,16 @@
     </div>
 
     <script>
+
         const input = document.getElementById("token-question");
         const log = document.getElementById("token-answer");
 
         input.addEventListener("input", updateValue);
 
         function updateValue(e) {
-            // Encodage de l'entrée utilisateur pour éviter les attaques XSS
-            const encodedValue = encodeHTML(e.target.value);
-            log.textContent = encodedValue;
+            log.textContent = e.target.value;
         }
 
-        // Fonction pour encoder les caractères spéciaux HTML
-        function encodeHTML(text) {
-            return text.replace(/&/g, "&amp;")
-                       .replace(/</g, "&lt;")
-                       .replace(/>/g, "&gt;")
-                       .replace(/"/g, "&quot;")
-                       .replace(/'/g, "&#039;");
-        }
     </script>
 
 </body>
